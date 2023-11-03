@@ -6,8 +6,6 @@ from multiprocessing.pool import Pool
 
 from .math import get_orthonormal_basis, get_rotation, normalized
 
-# TODO add our interpolation functions
-
 def get_zoom_pan_parameter_functions(w0: float, w1: float, 
                                      u0: float, u1: float, 
                                      rho: float=np.sqrt(2)) -> tuple:
@@ -172,11 +170,11 @@ def get_camera_distance(start: dict, end: dict,
 
     dist = 0
 
-    # TODO Add real distances for other metrics other than 3DImageFlow
     if metric == "LookatLinear" or metric == "TransformationsLinear":
-        look_dist = np.linalg.norm(look_diff)
-        pos_dist = np.linalg.norm(pos2-pos1)
-        dist = np.sqrt((look_dist**2)/2 + (pos_dist**2)/2)
+        # this could be enhanced by determining the Riemannian metrics
+        # for both metrics, but we will just use the distance one would
+        # normally use
+        dist = np.linalg.norm(pos2-pos1)
     elif metric == "3DImageFlow":
 
         rho = kwargs["rho"]
