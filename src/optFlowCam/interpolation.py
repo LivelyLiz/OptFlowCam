@@ -315,8 +315,11 @@ def interpolate_CatmullRom(t: float, control_points: list, knots: list,
 
 def disambiguate_spline(control_points: list, knots: list, spline: list):
     """
-    If spline has jumps/discontinuities in it, we need to fix the spline
-    by inserting additional control points and knots.
+    Inserts new control points and knots to resolve any gaps/discontinuities
+    that may be present in the spline.
+
+    Depending on the original control points, this function may not detect
+    the discontinuities reliably or detect some that are not present.
     """
 
     # this could be further improved because the current implementation
@@ -355,24 +358,27 @@ def disambiguate_spline(control_points: list, knots: list, spline: list):
                                not np.isclose(dot_di_di1, 1, atol=0.2))
 
         length_discontinuous = (not np.isclose(norm_di, norm_di_1, rtol=0.2) and \
-                                not np.isclose(norm_di, norm_di1, rtol=0.2))
+                                not np.isclose(norm_di, norm_di1, rtol=0.2) and \
+                                not np.isclose(norm_di, 0       , atol=0.01))
 
         if angle_discontinuous or length_discontinuous: 
         
             print(f"i:{i} t:{t} segment:{segment_index} angle:{angle_discontinuous} length:{length_discontinuous}")
+            print(f"cos angle di-1 and di: {dot_di_di_1} di+1 and di: {dot_di_di1}")
+            print(f"norms di-1: {norm_di_1} di: {norm_di} di+1: {norm_di1}")
 
-            knot = t
-
-            if np.any(map(lambda knot: np.isclose(t, knot), knots)):
+            if np.any(list(map(lambda knot: np.isclose(t, knot), new_knots))):
                 # if t is close to a knot (or the same) inserting
                 # the new point can cause problems when computing the
-                # spline
+                # spline and is probably a false positive
                 continue
 
             cam = spline[i]
-        
-            new_control_points.insert(segment_index+1, cam)
-            new_knots = np.insert(new_knots, segment_index+1, knot)
+
+            new_segment_index = get_segment_index(t, new_knots)
+
+            new_control_points.insert(new_segment_index+1, cam)
+            new_knots = np.insert(new_knots, new_segment_index+1, t)
 
             last_fixed_segment = segment_index
 
