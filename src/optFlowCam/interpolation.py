@@ -4,7 +4,8 @@ import copy
 from functools import partial
 from multiprocessing.pool import Pool
 
-from .math import get_orthonormal_basis, get_rotation, normalized
+from .math import get_rotation, normalized
+from .utility import unpack_camera
 
 def get_zoom_pan_parameter_functions(w0: float, w1: float, 
                                      u0: float, u1: float, 
@@ -92,8 +93,8 @@ def interpolate_t(t: float, focal: float, metric: str, **kwargs) -> dict:
         end = kwargs["end"]
 
         # assure orthonormal camera reference frame
-        pos1, view1, up1, right1, s1 = get_orthonormal_basis(start)
-        pos2, view2, up2, right2, s2 = get_orthonormal_basis(end)
+        pos1, view1, up1, right1, s1 = unpack_camera(start)
+        pos2, view2, up2, right2, s2 = unpack_camera(end)
     
     else:
         for arg in ["pos1", "view1", "up1", "right1", "s1", "pos2", "view2", "up2", "right2", "s2"]:
@@ -155,8 +156,8 @@ def get_camera_distance(start: dict, end: dict,
                         focal: float, metric: str, 
                         **kwargs) -> float:
     # assure orthonormal camera reference frame
-    pos1, view1, up1, right1, s1 = get_orthonormal_basis(start)
-    pos2, view2, up2, right2, s2 = get_orthonormal_basis(end)
+    pos1, view1, up1, right1, s1 = unpack_camera(start)
+    pos2, view2, up2, right2, s2 = unpack_camera(end)
 
     axisangle, _ = get_rotation({"view":view1, "up":up1, "right": right1},
                                 {"view":view2, "up":up2, "right": right2})
@@ -220,8 +221,8 @@ def interpolate_simple(start: dict, end: dict,
     '''
 
     # assure orthonormal camera reference frame
-    pos1, view1, up1, right1, s1 = get_orthonormal_basis(start)
-    pos2, view2, up2, right2, s2 = get_orthonormal_basis(end)
+    pos1, view1, up1, right1, s1 = unpack_camera(start)
+    pos2, view2, up2, right2, s2 = unpack_camera(end)
     
     _, R_f = get_rotation({"view":view1, "up":up1, "right": right1},
                           {"view":view2, "up":up2, "right": right2})

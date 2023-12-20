@@ -6,6 +6,10 @@ from collections import namedtuple
 AxisAngle = namedtuple("AxisAngle", "axis angle")
 
 def make_lookAt_matrix(pos: Vector, forw: Vector, up: Vector) -> Matrix:
+    # Vector and Matrix are Blenders own types and need to be used
+    # instead of numpy types because typecasting them for just this
+    # function would be pointless
+
     forw = -forw.normalized() # in look at matrix camera looks at negative forward
     right = up.cross(forw).normalized()
     up = forw.cross(right).normalized()
@@ -19,7 +23,12 @@ def make_lookAt_matrix(pos: Vector, forw: Vector, up: Vector) -> Matrix:
     lookAt = Matrix([right, up, forw, pos]).transposed()
     return lookAt
 
-def normalized(a: np.ndarray) -> float:
+def normalized(a: np.ndarray) -> np.ndarray:
+    '''
+    Returns a normalized ndarray and prints a warning
+    if the norm is close to zero
+    '''
+
     l2 = np.linalg.norm(a)
     if l2 < 1e-15:
         print("Norm near zero for ", a)
@@ -27,16 +36,21 @@ def normalized(a: np.ndarray) -> float:
     return a / l2
 
 def get_orthonormal_basis(cam: dict) -> tuple:
-    pos = np.array(cam["position"])
-    s = cam["frustum_scale"]
+    '''
+    Returns an orthonormal basis for the given camera configuration.
+
+    Input camera object needs to have a view and up vector.
+    '''
+
     view = normalized(np.array(cam["view"]))
     up = normalized(np.array(cam["up"]))
     right = normalized(np.cross(up, view))
     up = normalized(np.cross(view, right))
 
-    assert np.all([not np.isclose(np.linalg.norm(v), 0) for v in [view, up, right]]), "Given vectors do not form a basis for camera orientation!"
+    assert np.all([not np.isclose(np.linalg.norm(v), 0) for v in [view, up, right]]),\
+        "Given vectors do not form a basis for camera orientation!"
 
-    return pos, view, up, right, s
+    return view, up, right
 
 def get_rotation(start: dict, end: dict) -> tuple:
     vecs1 = [start[key] for key in ["view", "right", "up"]]
