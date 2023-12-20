@@ -3,14 +3,14 @@ import bpy
 from ..interpolation import get_camera_distance
 from ..utility import cam_to_sample
 
+import numpy as np
+
 # ------------------------------------------------------------------------------
 
 class OFC_OT_RedistributeFrames(bpy.types.Operator):
 
     #custom ID
     bl_idname = "ofc.redistribute_frames"
-    #bl_parent_id = "OBJECT_PT_optFlowPanel"
-    #this variable is a label/name that is displayed to the user
     bl_label = "Redistribute Frames"
     bl_options = {'INTERNAL'}
 
@@ -45,25 +45,28 @@ class OFC_OT_RedistributeFrames(bpy.types.Operator):
             raise ValueError(f"Unknown method: {props.parametrization}")
 
         focal = cam_samples[0]["focal"]
+        dists = np.array([get_camera_distance(cam_samples[i], cam_samples[i+1], focal, 
+                                     props.metric, rho=props.rho)**alpha 
+                    for i in range(len(keyframes)-1)])
         
-        dists = [get_camera_distance(cam_samples[i], cam_samples[i+1], focal, props.metric, rho=props.rho)**alpha for i in range(len(keyframes)-1)]
-        total_dist = sum(dists)
-        dists = [d/total_dist for d in dists]
+        dists = dists/np.sum(dists)
+        dists = np.insert(dists, 0, 0)
+        new_frames = np.cumsum(dists)*(n_frames - 1) + keyframes[0].frame
 
+        # store the original order of cameras
+        # to circumvent the issue with automatic sorting 
         cams = [kf.cam for kf in keyframes]
-        new_frames = [kf.frame for kf in keyframes]
-        for i in range(len(new_frames)-2, 0, -1):
-            new_frames[i] = new_frames[i+1] - int(dists[i]*n_frames)
 
         # need to precompute and assign after because
         # automatic sort shuffles keyframes
         # ideal would be to create and assign the new list without
-        # any sort inbetween, but that seems not possible
+        # any sort inbetween
         for i in range(len(new_frames)-1, 0, -1):
-            while keyframes[i].frame != new_frames[i]:
-                keyframes[i].frame = new_frames[i]
-            keyframes[i].frame = new_frames[i]
+            while keyframes[i].frame != int(new_frames[i]):
+                keyframes[i].frame = int(new_frames[i])
             keyframes[i].cam = cams[i]
+
+        
 
         return {'FINISHED'}
     
