@@ -10,8 +10,6 @@ from ..utility import cam_to_sample, get_look_at_point
 class OFC_OT_Realize_Keyframe(bpy.types.Operator):
     #custom ID
     bl_idname = "ofc.realize_keyframe"
-    #bl_parent_id = "OBJECT_PT_optFlowPanel"
-    #this variable is a label/name that is displayed to the user
     bl_label = "Realize Keyframe"
     bl_options = {'INTERNAL'}
 

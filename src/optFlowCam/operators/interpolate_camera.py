@@ -13,8 +13,6 @@ class OFC_OT_InterpolateCamera(bpy.types.Operator):
     
     #custom ID
     bl_idname = "ofc.interpolate_camera"
-    #bl_parent_id = "OBJECT_PT_optFlowPanel"
-    #this variable is a label/name that is displayed to the user
     bl_label = "Interpolate Optimal Camera"
     bl_options = {'INTERNAL'}
 
@@ -173,25 +171,16 @@ class OFC_OT_InterpolateCamera(bpy.types.Operator):
             if props.make_path_permanent:
                 # path already exists, just need to move it to new collection
                 for obj,name in zip((cam_path_obj, lookat_path_obj), ("CameraPath", "LookAtPath")):
-                    print(obj.name)
-
                     for c in obj.users_collection:
-                        print(c.name)
                         c.objects.unlink(obj)
 
                     obj.name = name
                     coll.objects.link(obj)
-                    print(coll.name)
 
                 bpy.context.view_layer.update()
             self.quit(context)
             return {'FINISHED'}
 
-        # other return values
-        # {'CANCELLED'}
-        # {'FINISHED'}
-
-        # pass through indicates operator is still running
         # modal will be run the next time an UI event is triggered
         return {'RUNNING_MODAL'}
 
@@ -203,10 +192,6 @@ class OFC_OT_InterpolateCamera(bpy.types.Operator):
             bpy.data.objects.remove(obj, do_unlink=True)
 
         bpy.data.collections.remove(coll)
-
-        # remove timer we use for updates
-        wm = context.window_manager
-        #wm.event_timer_remove(self._timer)
 
         context.scene.OFC.op_props.operator_running = False
         context.scene.OFC.op_props.property_unset("temp_cam")

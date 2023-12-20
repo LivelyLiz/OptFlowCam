@@ -28,6 +28,8 @@ class OFC_PG_OptimalPathInitialization(bpy.types.PropertyGroup):
         ("Uniform", "Uniform", "Distribution equally spaced between the start and end frame", "CURVE_PATH", 2),
     ]
 
+    # this is added during registration because Blender cannot find
+    # the type OFC_PG_KeyframeItem otherwise
     #keyframes: bpy.props.CollectionProperty(
     #    type= keyframe_list.OFC_PG_KeyframeItem)
 

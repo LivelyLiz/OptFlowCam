@@ -9,7 +9,6 @@ class OFC_OT_CreateLookAtCamera(bpy.types.Operator):
     
     #custom ID
     bl_idname = "ofc.create_look_at_camera"
-    #this variable is a label/name that is displayed to the user
     bl_label = "Create Look-At Camera"
     bl_options = {'INTERNAL'}
 
@@ -49,7 +48,7 @@ class OFC_OT_CreateLookAtCamera(bpy.types.Operator):
         # add track_to constraint to camera
         track_to_const = camera.constraints.new('TRACK_TO')
         
-        # set empty at track object
+        # set empty as track object
         track_to_const.target = target
         track_to_const.track_axis = 'TRACK_NEGATIVE_Z'
         track_to_const.up_axis = 'UP_Y'
