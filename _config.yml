@@ -1,0 +1,16 @@
+# Site settings
+title: OptFlowCam
+tag_text: OptFlowCam
+description: A 3D Image Flow Based Metric in Camera Space for Strongly-Scaled Camera Paths
+url: "https://livelyliz.github.io" # base URL for your site ie. "https://www.example.com"
+baseurl: "/OptFlowCam/"
+
+# Build settings
+remote_theme: adueck/good-clean-read
+
+font-awesome-include: true # make this false if you don't need font-awesome
+
+# Build settings
+markdown: kramdown
+
+exclude: ["README.md"]
