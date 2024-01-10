@@ -6,7 +6,7 @@ url: "https://livelyliz.github.io" # base URL for your site ie. "https://www.exa
 baseurl: "/OptFlowCam/"
 
 # Build settings
-remote_theme: adueck/good-clean-read
+remote_theme: LivelyLiz/good-clean-read
 
 font-awesome-include: true # make this false if you don't need font-awesome
 
