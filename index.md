@@ -11,6 +11,8 @@ layout: default
   Holger Theisel
 </div>
 
+{% include sharing.html %}
+
 ### Abstract
 
 Interpolation between camera positions is a standard problem in computer graphics 
