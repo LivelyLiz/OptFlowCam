@@ -4,7 +4,7 @@ layout: default
 
 ## A 3D Image Flow Based Metric in Camera Space for Strongly-Scaled Camera Paths
 
-<div style="text-align:right">
+<div style="text-align:right; margin-bottom:3rem;">
   Lisa Piotrowski<br>
   Michael Motejat<br>
   Christian Rössl<br>
@@ -15,6 +15,7 @@ layout: default
 
 ### Abstract
 
+<div style="text-align:justify;">
 Interpolation between camera positions is a standard problem in computer graphics 
 and can be considered the foundation of camera path planning. 
 As the basis for a new interpolation method, we introduce a new Riemannian metric 
@@ -26,16 +27,17 @@ Furthermore, we propose a geodesic Catmull-Rom interpolant for keyframe camera
 animation. We compare our approach with several standard camera interpolation 
 methods and obtain consistently better camera paths especially for cameras with 
 extremely varying scales.
+</div>
 
 ### Resources
 
-- [Author PDF]()
-- [Blender Add-On]()
+- [Author PDF]() (TBD)
+- [Blender Add-On](https://github.com/LivelyLiz/OptFlowCam)
 
-**Video 1: Results**
+**Video 1: Results**  
 TBD
 
-**Video 2: Interactive Session**
+**Video 2: Interactive Session**  
 TBD
 
 ### Cite As
