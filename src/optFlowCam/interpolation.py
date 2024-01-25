@@ -101,6 +101,18 @@ def interpolate_t(t: float, focal: float, metric: str, **kwargs) -> dict:
             if not arg in kwargs:
                 raise ValueError(f"Function 'interpolate_t' needs keyword argument '{arg}' if no 'start' and 'end' are given.")
 
+        pos1 = kwargs["pos1"]
+        view1 = kwargs["view1"]
+        up1 = kwargs["up1"]
+        right1 = kwargs["right1"]
+        s1 = kwargs["s1"]
+
+        pos2 = kwargs["pos2"]
+        view2 = kwargs["view2"]
+        up2 = kwargs["up2"]
+        right2 = kwargs["right2"]
+        s2 = kwargs["s2"]
+
     if not "R_f" in kwargs:
         _, R_f = get_rotation({"view":view1, "up":up1, "right": right1},
                           {"view":view2, "up":up2, "right": right2})
@@ -220,17 +232,9 @@ def interpolate_simple(start: dict, end: dict,
     kwargs should contain the parameter rho if metric==3DImageFlow.
     '''
 
-    # assure orthonormal camera reference frame
-    pos1, view1, up1, right1, s1 = unpack_camera(start)
-    pos2, view2, up2, right2, s2 = unpack_camera(end)
-    
-    _, R_f = get_rotation({"view":view1, "up":up1, "right": right1},
-                          {"view":view2, "up":up2, "right": right2})
-
     cams = [interpolate_t(t, focal, metric, 
-                          pos1=pos1, view1=view1, up1=up1, s1=s1,
-                          pos2=pos2, view2=view2, up2=up2, s2=s2,
-                          R_f=R_f, **kwargs)
+                          start=start, end=end, 
+                          **kwargs)
                 for t in np.linspace(0, 1, n)]
 
     return cams
