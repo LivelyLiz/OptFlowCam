@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build Blender Addon
-        uses: BlenderKit/blender-addon-build-action@main
+        uses: BlenderKit/blender-addon-build@main
         with:
           name: 'OptFlowCam'
           name-suffix: 'commit-hash'
@@ -24,7 +24,7 @@ jobs:
     needs: Build
     steps:
       - name: Release addon
-        uses: blenderkit/blender-addon-release@main
+        uses: BlenderKit/blender-addon-release@main
         with:
           artifact_name: optFlowCam
           release_name: OptFlowCam
