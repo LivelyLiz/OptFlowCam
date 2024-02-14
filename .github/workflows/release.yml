@@ -14,7 +14,6 @@ jobs:
         uses: BlenderKit/blender-addon-build@main
         with:
           name: 'OptFlowCam'
-          name-suffix: 'commit-hash'
           build-command: ''
           build-location: './src/optFlowCam'
           do-checkout: 'true'
@@ -26,6 +25,6 @@ jobs:
       - name: Release addon
         uses: BlenderKit/blender-addon-release@main
         with:
-          artifact_name: optFlowCam
+          artifact_name: OptFlowCam
           release_name: OptFlowCam
           version: ${{github.event.inputs.version}} 
