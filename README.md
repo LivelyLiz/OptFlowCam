@@ -1,7 +1,7 @@
 # OptFlowCam - A Blender Add-On for Smooth Camera Interpolation
 
 > **About the Add-On**  
-> This add-on is an implementation of the paper "". It can be used to create smooth camera paths based on an algorithm that computes the "shortest" path in a special camera space. Its special strength is smoothly switching between different levels of detail (e.g. detail view to overview). 
+> This add-on is an implementation of the paper "OptFlowCam: A 3D-Image-Flow-Based Metric in Camera Space for Camera Paths in Scenes with Extreme Scale Variations". It can be used to create smooth camera paths based on an algorithm that computes the "shortest" path in a special camera space. Its special strength is smoothly switching between different levels of detail (e.g. detail view to overview). 
 
 ## :arrow_down: Installation
 
@@ -84,7 +84,5 @@ The following is a non-exhaustive list of things that could be improved of added
 
 ## :page_with_curl: Citation
 
-This add-on is based on the paper "XYZ" and developed by its author. You can cite it as
-```
-```
-
+This add-on is based on the paper "A 3D-Image-Flow-Based Metric in Camera Space for Camera Paths in Scenes with Extreme Scale Variations" and developed by its author.
+Visit our [project webpage](https://livelyliz.github.io/OptFlowCam/) to find all information about the project and how to cite it.
