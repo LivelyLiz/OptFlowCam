@@ -2,7 +2,7 @@
 layout: default
 ---
 
-## A 3D Image Flow Based Metric in Camera Space for Strongly-Scaled Camera Paths
+## A 3D-Image-Flow-Based Metric in Camera Space for Camera Paths in Scenes with Extreme Scale Variations
 
 <div style="text-align:right; margin-bottom:3rem;">
   Lisa Piotrowski<br>
@@ -32,13 +32,15 @@ extremely varying scales.
 ### Resources
 
 - [Author PDF]() (TBD)
+- [Presentation]() (TBD)
 - [Blender Add-On](https://github.com/LivelyLiz/OptFlowCam)
+- [Additional Material]() (TBD)
 
 **Video 1: Results**  
-TBD
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_2oiWZafFb8?si=L4bSyUA4M8fPOcLR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 **Video 2: Interactive Session**  
-TBD
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gMEZpkAyOB0?si=AKsryRCQUFArHobB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ### Cite As
 
