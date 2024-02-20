@@ -31,10 +31,10 @@ extremely varying scales.
 
 ### Resources
 
-- [Author PDF]() (TBD)
+- [Author PDF](https://github.com/LivelyLiz/OptFlowCam/blob/assets/paper/optFlowCam.pdf?raw=true)
 - [Presentation]() (TBD)
 - [Blender Add-On](https://github.com/LivelyLiz/OptFlowCam)
-- [Additional Material]() (TBD)
+- [Additional Material](https://github.com/LivelyLiz/OptFlowCam/blob/assets/paper/optFlowCam_maple.zip?raw=true)
 
 **Video 1: Results**  
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_2oiWZafFb8?si=L4bSyUA4M8fPOcLR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
